@@ -3,16 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Retirement" />
   <title>Countdown to Retirement</title>
   <style>
     :root {
-      --bg-gradient: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      --card-bg: rgba(255, 255, 255, 0.08);
-      --card-border: rgba(255, 255, 255, 0.16);
+      --card-bg: rgba(15, 23, 30, 0.62);
+      --card-border: rgba(255, 255, 255, 0.22);
       --accent: #f6b93b;
-      --accent-glow: rgba(246, 185, 59, 0.35);
+      --accent-glow: rgba(246, 185, 59, 0.4);
       --text-main: #ffffff;
-      --text-muted: #cbd5e1;
+      --text-muted: #e2e8f0;
     }
 
     * {
@@ -26,7 +28,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: var(--bg-gradient);
+      /* Scenic RV background image with a subtle dark tint for readability */
+      background:
+        linear-gradient(rgba(10, 18, 26, 0.42), rgba(10, 18, 26, 0.58)),
+        url("https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?auto=format&fit=crop&w=2000&q=80")
+        center / cover no-repeat fixed;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       color: var(--text-main);
       padding: 1.5rem;
@@ -36,24 +42,24 @@
       width: 100%;
       max-width: 780px;
       background: var(--card-bg);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--card-border);
       border-radius: 24px;
       padding: 3rem 2rem;
       text-align: center;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.65);
     }
 
     .badge {
       display: inline-block;
       padding: 0.4rem 1rem;
       border-radius: 999px;
-      background: rgba(246, 185, 59, 0.15);
-      border: 1px solid rgba(246, 185, 59, 0.4);
+      background: rgba(246, 185, 59, 0.2);
+      border: 1px solid rgba(246, 185, 59, 0.5);
       color: var(--accent);
       font-size: 0.85rem;
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       margin-bottom: 1.25rem;
@@ -64,6 +70,7 @@
       font-weight: 800;
       letter-spacing: -0.02em;
       margin-bottom: 0.5rem;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
     }
 
     .subtitle {
@@ -80,16 +87,16 @@
     }
 
     .time-box {
-      background: rgba(0, 0, 0, 0.25);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.14);
       border-radius: 16px;
       padding: 1.5rem 0.75rem;
-      transition: transform 0.2s ease;
+      transition: transform 0.2s ease, border-color 0.2s ease;
     }
 
     .time-box:hover {
       transform: translateY(-4px);
-      border-color: rgba(246, 185, 59, 0.4);
+      border-color: rgba(246, 185, 59, 0.55);
     }
 
     .number {
@@ -127,7 +134,7 @@
     .progress-track {
       width: 100%;
       height: 12px;
-      background: rgba(0, 0, 0, 0.35);
+      background: rgba(0, 0, 0, 0.45);
       border-radius: 999px;
       overflow: hidden;
     }
@@ -167,9 +174,9 @@
 </head>
 <body>
   <main class="container">
-    <div class="badge">The Next Chapter Awaits</div>
+    <div class="badge">The Open Road Awaits</div>
     <h1>Countdown to Retirement</h1>
-    <p class="subtitle">Target Date: <strong>Thursday, November 25, 2027</strong></p>
+    <p class="subtitle">Target Date: <strong>Sunday, November 21, 2027</strong></p>
 
     <div class="countdown-grid" id="countdown">
       <div class="time-box">
@@ -191,7 +198,7 @@
     </div>
 
     <div class="celebration" id="celebration">
-      🎉 Happy Retirement! You officially made it! 🎉
+      🚐 Happy Retirement! Time to hit the open road! 🚐
     </div>
 
     <div class="progress-section">
@@ -208,8 +215,8 @@
   </main>
 
   <script>
-    // Target: November 25, 2027 at 5:00 PM local time (change 17, 0, 0 to 0, 0, 0 for midnight)
-    const retirementDate = new Date(2027, 10, 25, 17, 0, 0).getTime();
+    // Target: November 21, 2027 at 5:00 PM local time (change 17, 0, 0 to 0, 0, 0 for midnight)
+    const retirementDate = new Date(2027, 10, 21, 17, 0, 0).getTime();
     // Baseline start date for the progress bar (November 19, 2026)
     const startDate = new Date(2026, 10, 19, 0, 0, 0).getTime();
 
@@ -235,7 +242,6 @@
       document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
       document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
 
-      // Calculate progress percentage
       const totalDuration = retirementDate - startDate;
       const elapsed = Math.max(0, now - startDate);
       const percentage = Math.min(100, (elapsed / totalDuration) * 100);
